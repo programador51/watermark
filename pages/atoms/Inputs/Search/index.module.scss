@@ -1,0 +1,42 @@
+.search {
+  display: flex;
+  margin: 0.556rem 0;
+  justify-content: center;
+  align-items: center;
+  * {
+    height: 40px;
+  }
+  input,
+  button {
+    border: 0.083rem solid var(--purple);
+    background-color: white;
+    padding: 10px;
+  }
+  button {
+    svg {
+      path {
+        color: var(--purple);
+      }
+    }
+  }
+  input {
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    border-right: transparent;
+    color: var(--purple);
+    width: 77%;
+  }
+  button {
+    width: 10%;
+    border-radius: 0 5px 5px 0;
+    border-left: transparent;
+  }
+  span {
+    height: auto;
+  }
+
+  .clear {
+    border-right: white;
+    border-radius: 0;
+  }
+}

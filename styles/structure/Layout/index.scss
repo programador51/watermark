@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  background-color: var(--purpleBg);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: minmax(100%, 500px);
+  grid-template-rows: 10vh 80vh;
+  justify-content: center;
+}
+
+@media screen and(max-width: 500px) {
+  main {
+    grid-template-rows: 10vh 90vh;
+    border-radius: 0;
+  }
+}

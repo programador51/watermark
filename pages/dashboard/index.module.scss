@@ -1,0 +1,29 @@
+.dashboardContainer {
+}
+
+.stickySearch {
+  position: sticky;
+  top: 0;
+  padding: 7.506px;
+  background-color: var(--purpleBg);
+  hr {
+    margin: 0.556rem 0;
+    color: white;
+  }
+}
+
+.sell {
+  border-radius: 0.278rem;
+  background-color: var(--purple);
+  margin: 0.833rem;
+  padding: 0.556rem;
+  box-sizing: border-box;
+  time {
+    &::after {
+      content: "🔹";
+    }
+  }
+  * {
+    font-size: 12.996px;
+  }
+}
