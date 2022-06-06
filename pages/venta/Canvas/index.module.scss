@@ -1,0 +1,63 @@
+.containerAgressiveWatermark {
+  display: flex;
+  align-items: center;
+  margin: 0.278rem 0;
+  justify-content: start;
+
+  label:last-of-type {
+    border-radius: 0 0.278rem 0.278rem 0;
+  }
+
+  label:first-of-type {
+    border-radius: 0.278rem 0 0 0.278rem;
+  }
+
+  label {
+    height: 2.222rem;
+    padding: 0 10.008px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 25%;
+    background-color: var(--purple);
+  }
+
+  input {
+    display: none !important;
+  }
+
+  input[type="radio"]:checked + label {
+    border: 1.998px solid rgb(233, 60, 60);
+  }
+}
+
+.label {
+  //   font-weight: bold;
+  margin: 0 5.004px 0 0;
+}
+
+.configurations {
+  margin: 5%;
+}
+
+.color {
+  display: flex;
+  align-items: center;
+}
+
+.separator {
+  margin: 0.556rem 0;
+}
+
+.sameLine {
+  display: flex;
+  align-items: center;
+}
+
+.creatorWatermark {
+  color: black;
+  padding: 0.278rem;
+  width: 100%;
+  border-radius: 0.278rem;
+  border: none;
+}

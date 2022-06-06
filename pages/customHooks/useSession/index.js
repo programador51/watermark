@@ -1,8 +1,12 @@
 import { useState } from "react";
 
+/**
+ * Manage the session of the user loged in
+ * @returns {import("./types").useSessionValuesI}
+ */
 export default function useSession() {
   const [state, setState] = useState({
-    userName: undefined,
+    userName: "angywii",
     email: undefined,
   });
 

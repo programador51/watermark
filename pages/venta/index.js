@@ -1,16 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import MenuLogged from "pages/structure/MenuLogged";
 import Content from "pages/structure/LayoutContent";
-import { Dropzone, FileItem } from "@dropzone-ui/react";
-import Button from "pages/atoms/Button";
+import { Dropzone, FileItem, FullScreenPreview } from "@dropzone-ui/react";
+
 import styles from "./index.module.scss";
 import Canvas from "./Canvas";
+import { ContextSession } from "pages/_app";
 
 export default function Venta() {
   /**
    * @type {[import("@dropzone-ui/react").FileValidated[],()=>void]}
    */
   const [files, setFiles] = useState([]);
+  const [imageSrc, setImageSrc] = useState(undefined);
+  const { userName } = useContext(ContextSession);
 
   /**
    * List of files uploaded
@@ -25,20 +28,15 @@ export default function Venta() {
     setFiles(files.filter((x) => x.id !== id));
   };
 
-  // useEffect(() => {
-  //   const a = document.getElementById("test");
-  //   console.log(a.naturalWidth);
-  // }, []);
-
-  //   const image = new Image();
-  //   const canvas = document.getElementById("canvasContainer");
+  const handleSee = (imageSource) => {
+    setImageSrc(imageSource);
+  };
 
   return (
     <>
       <MenuLogged title="Venta" />
       <Content>
         <Dropzone
-          view="list"
           style={{
             width: "100%",
             background: "#c5c5c5",
@@ -53,28 +51,35 @@ export default function Venta() {
         >
           {files.map((file) => (
             <>
-              <FileItem {...file} onDelete={removeFile} key={file.id} info />`
+              <FileItem
+                {...file}
+                onSee={handleSee}
+                preview
+                hd
+                onDelete={removeFile}
+                key={window.crypto.randomUUID()}
+              />
+              `
             </>
           ))}
+
+          <div
+            style={{
+              zIndex: "100",
+            }}
+          >
+            <FullScreenPreview
+              imgSource={imageSrc}
+              openImage={imageSrc}
+              onClose={(e) => handleSee(undefined)}
+            />
+          </div>
         </Dropzone>
 
-        {files.map((file) => (
-          <Canvas key={file.id} file={file} />
-        ))}
-
-        {/* {files.map((file) => (
-          <canvas
-            width="972"
-            height="1600"
-            style={{ border: "1px solid red" }}
-          ></canvas>
-        ))}
-
-      
-          alt=""
-        /> */}
-
-        <Button>Descargar</Button>
+        <Canvas
+          files={files}
+          watermark={`https://www.onlynudes.com/${userName}`}
+        />
       </Content>
     </>
   );

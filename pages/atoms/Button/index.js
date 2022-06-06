@@ -7,5 +7,9 @@ import styles from "./index.module.scss";
  * @returns {JSX.Element}
  */
 export default function Button(props) {
-  return <button className={styles.customBtn}>{props.children}</button>;
+  return (
+    <button {...props} className={styles.customBtn}>
+      {props.children}
+    </button>
+  );
 }

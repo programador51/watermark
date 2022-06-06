@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import MenuLogged from "pages/structure/MenuLogged";
-import useSession from "pages/customHooks/useSession";
 import Content from "pages/structure/LayoutContent";
 import SearchInput from "pages/atoms/Inputs/Search";
 import styles from "./index.module.scss";
@@ -8,8 +7,6 @@ import Button from "pages/atoms/Button";
 import Link from "next/link";
 
 export default function Dashboard() {
-  const { email, userName } = useSession();
-
   const [sells, setSells] = useState([
     {
       id: "fd966f4d-88ae-4ec9-bbcf-1574cbdc8cb7",
