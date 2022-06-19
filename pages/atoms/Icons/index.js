@@ -121,6 +121,16 @@ const LIST_OCONS = {
       />
     </svg>
   ),
+  home: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-5 w-5"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+    </svg>
+  ),
   search: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -150,12 +160,40 @@ const LIST_OCONS = {
       />
     </svg>
   ),
+  cellphone: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-5 w-5"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path
+        fillRule="evenodd"
+        d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zm3 14a1 1 0 100-2 1 1 0 000 2z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
+  info: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-5 w-5"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path
+        fillRule="evenodd"
+        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
 };
 
 /**
  * Render an icon
  * @param {object} props - Props
- * @param {"user"|"menu"|"close"|"engine"|"dashboard"|"creditCard"|"logout"|"login"|"search"|"dollar"} props.icon
+ * @param {"info"|"user"|"menu"|"close"|"engine"|"dashboard"|"creditCard"|"logout"|"login"|"search"|"dollar"|"home"|"cellphone"} props.icon
  * @returns {JSX.Element} Icon
  */
 export default function Icon({ icon }) {

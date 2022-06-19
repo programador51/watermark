@@ -1,15 +1,30 @@
-import Head from "next/head";
-import Image from "next/image";
-import { createContext } from "react";
-import useSession from "./customHooks/useSession";
-import Dashboard from "./dashboard";
-import Venta from "./venta";
-
-const ContextSession = createContext();
-const { Provider } = ContextSession;
+import Button from "./atoms/Button";
+import styles from "./styles.module.scss";
+import Content from "./structure/LayoutContent";
 
 export default function Home() {
-  const useSessionValues = useSession();
+  return (
+    <Content>
+      <div className={styles.containerIndex}>
+        <h1>Only Nudes - Protege tu contenido</h1>
+        <p>
+          Comparte tu contenido con registros para trackear filtraciones en la
+          web
+        </p>
 
-  return <p>Hola</p>;
+        <div className={styles.gallery}>
+          <img src="/model-1.png" alt="model-1" />
+          <img src="/model-2.png" alt="model-1" />
+          <img src="/model-3.png" alt="model-1" />
+          <img src="/model-4.png" alt="model-1" />
+          <img src="/model-5.png" alt="model-1" />
+        </div>
+
+        <div className={styles.navigationIndex}>
+          <Button>Demo</Button>
+          <Button>Más información</Button>
+        </div>
+      </div>
+    </Content>
+  );
 }

@@ -1,17 +1,33 @@
-import { useState } from "react";
+import { AuthContext } from "pages/structure/Layout";
+import { useEffect } from "react";
+import { useContext } from "react";
+import { useRouter } from "next/router";
 
-/**
- * Manage the session of the user loged in
- * @returns {import("./types").useSessionValuesI}
- */
-export default function useSession() {
-  const [state, setState] = useState({
-    userName: "angywii",
-    email: undefined,
-  });
+export default function useSession({
+  redirectOnUnauthorized = true,
+  createAccountOnReadCookie = false,
+}) {
+  const { status } = useContext(AuthContext);
 
-  return {
-    userName: state.userName,
-    email: state.email,
-  };
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated" && redirectOnUnauthorized) {
+      router.push("/");
+    }
+  }, [status]);
+
+  useEffect(() => {
+    (async function () {
+      if (createAccountOnReadCookie === true) {
+        try {
+          const res = await fetch(`/api/users`);
+          const apiUsers = await res.json();
+          console.log(apiUsers.users);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    })();
+  }, []);
 }

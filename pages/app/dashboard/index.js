@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import MenuLogged from "pages/structure/MenuLogged";
+import React, { useState } from "react";
 import Content from "pages/structure/LayoutContent";
 import SearchInput from "pages/atoms/Inputs/Search";
 import styles from "./index.module.scss";
 import Button from "pages/atoms/Button";
 import Link from "next/link";
+import useSession from "pages/customHooks/useSession";
+import App from "..";
 
 export default function Dashboard() {
   const [sells, setSells] = useState([
@@ -261,13 +262,12 @@ export default function Dashboard() {
   ]);
 
   return (
-    <>
-      <MenuLogged title="Dashboard" />
+    <App>
       <Content>
         <div className={styles.dashboardContainer}>
           <div className={styles.stickySearch}>
             <SearchInput />
-            <Link href="/venta">
+            <Link href="/app/venta">
               <a href="">
                 <Button>Nueva venta</Button>
               </a>
@@ -286,6 +286,6 @@ export default function Dashboard() {
           </div>
         </div>
       </Content>
-    </>
+    </App>
   );
 }

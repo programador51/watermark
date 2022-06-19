@@ -1,11 +1,10 @@
-import React, { useContext, useState } from "react";
-import MenuLogged from "pages/structure/MenuLogged";
+import React, { useState } from "react";
 import Content from "pages/structure/LayoutContent";
 import { Dropzone, FileItem, FullScreenPreview } from "@dropzone-ui/react";
 
-import styles from "./index.module.scss";
 import Canvas from "./Canvas";
-import { ContextSession } from "pages/_app";
+import { useSession } from "next-auth/react";
+import App from "..";
 
 export default function Venta() {
   /**
@@ -13,7 +12,7 @@ export default function Venta() {
    */
   const [files, setFiles] = useState([]);
   const [imageSrc, setImageSrc] = useState(undefined);
-  const { userName } = useContext(ContextSession);
+  const { data } = useSession();
 
   /**
    * List of files uploaded
@@ -33,8 +32,7 @@ export default function Venta() {
   };
 
   return (
-    <>
-      <MenuLogged title="Venta" />
+    <App>
       <Content>
         <Dropzone
           style={{
@@ -78,9 +76,10 @@ export default function Venta() {
 
         <Canvas
           files={files}
-          watermark={`https://www.onlynudes.com/${userName}`}
+          watermark={`https://www.onlynudes.com/${data?.user.name}`}
+          watermarkLevel="none"
         />
       </Content>
-    </>
+    </App>
   );
 }

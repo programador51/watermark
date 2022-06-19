@@ -1,6 +1,17 @@
+@font-face {
+  font-family: "Filxgirl";
+  src: url("../public/Filxgirl.TTF");
+}
+
+@font-face {
+  font-family: "Umunu";
+  src: url("../public/umunu.otf");
+}
+
 :root {
   --purple: hsl(289, 22%, 25%);
   --purpleBg: hsl(300, 9%, 41%);
+  --primaryFont: "Umunu";
 }
 
 html,
@@ -20,4 +31,11 @@ a {
   box-sizing: border-box;
   color: white;
   font-size: 18px;
+  font-family: var(--primaryFont);
+}
+
+.logo {
+  font-family: "Filxgirl";
+  font-size: 1.667rem;
+  margin: 0 0.833rem;
 }
