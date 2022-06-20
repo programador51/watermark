@@ -7,83 +7,6 @@ import { setCookies } from "cookies-next";
 import requestIp from "request-ip";
 import { sequelize } from "../../../sequelize/querys";
 
-// export default NextAuth({
-//   providers: [
-//     FacebookProvider({
-//       clientId: process.env.FACEBOOK_CLIENT_ID,
-//       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-//     }),
-//   ],
-//   cookies:{
-//     state
-//   },
-//   callbacks: {
-//     async signIn({ user, account, profile, email, credentials }) {
-//       console.log(user, account, profile, email, credentials);
-
-//       // let testAccount = await nodemailer.createTestAccount();
-
-//       // // create reusable transporter object using the default SMTP transport
-//       // let transporter = nodemailer.createTransport({
-//       //   host: "smtp.gmail.com",
-//       //   port: 465,
-//       //   secure: true, // true for 465, false for other ports
-//       //   auth: {
-//       //     user: "gskitcat@gmail.com", // generated ethereal user
-//       //     pass: "otvsthtpkpcmtfso", // generated ethereal password
-//       //   },
-//       // });
-
-//       // // send mail with defined transport object
-//       // await transporter.sendMail({
-//       //   from: '"Fred Foo 👻" <gskitcat@gmail.com>', // sender address
-//       //   to: "jperez@saiko.mx", // list of receivers
-//       //   subject: "Hello ✔", // Subject line
-//       //   text: "Hello world?", // plain text body
-//       //   html: "<b>Hello world?</b>", // html body
-//       // });
-
-//       const userDb = await sequelize.User.findOne({
-//         where: {
-//           email: user.email,
-//         },
-//       });
-
-//       if (userDb === null) {
-//         sequelize.User.create({
-//           defaultWatermark: `www.onlynudes.com/${user.id}`,
-//           logInMethod: "facebook",
-//           profilePicture: user.image,
-//           registrationDate: "2022-01-01",
-//           subscription: null,
-//           email: user.email,
-//         })
-//           .then((res) => console.log(res))
-//           .catch((e) => console.log(e));
-//       } else {
-//         console.log("alread registered!");
-//       }
-//       console.log("Me logieeee", user, account, profile, email, credentials);
-//       return true;
-//     },
-//     async redirect({ url, baseUrl }) {
-//       // console.log("redirect");
-//       return baseUrl;
-//     },
-//     async session({ session, user, token }) {
-//       console.log("session");
-
-//       setCookies("aaaaa", "secretValue", {
-//         httpOnly: true,
-//       });
-//       return session;
-//     },
-//     async jwt({ token, user, account, profile, isNewUser }) {
-//       return token;
-//     },
-//   },
-// });
-
 /**
  * Middleware to handle the authorization of the app
  * @param {import("next").NextApiRequest} req  - Request
@@ -146,7 +69,7 @@ const nextAuthOptions = (req, res) => ({
           JSON.parse(JSON.stringify(userDb)),
           process.env.SECRET_SIGN_JWT,
           {
-            expiresIn: "5m",
+            expiresIn: process.env.ACCESS_TOKEN_DURATION,
           }
         );
         const refreshToken = jwt.sign(
@@ -154,13 +77,13 @@ const nextAuthOptions = (req, res) => ({
           process.env.SECRET_SIGN_JWT
         );
 
-        setCookies("onlynudesaccesstoken", accessToken, {
+        setCookies(process.env.ACCESS_TOKEN_NAME, accessToken, {
           req,
           res,
           httpOnly: true,
         });
 
-        setCookies("onlynudesrefreshtoken", refreshToken, {
+        setCookies(process.env.REFRESH_TOKEN_NAME, refreshToken, {
           req,
           res,
           httpOnly: true,

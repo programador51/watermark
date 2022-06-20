@@ -1,8 +1,8 @@
-import { User } from "sequelize/users";
-import { Customer } from "sequelize/customers";
-import { RefreshToken } from "sequelize/refreshtokens";
-import { Album } from "sequelize/album";
-import { AlbumsEvidence } from "sequelize/album/evidence";
+import { User } from "../../sequelize/users";
+import { Customer } from "../../sequelize/customers";
+import { RefreshToken } from "../../sequelize/refreshtokens";
+import { Album } from "../../sequelize/album";
+import { AlbumsEvidence } from "../../sequelize/album/evidence";
 
 User.hasMany(Customer, {
   foreignKey: "user",

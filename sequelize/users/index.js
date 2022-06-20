@@ -1,7 +1,5 @@
-import { STRING } from "sequelize";
 import { DataTypes } from "sequelize";
 import db from "../../sequelize";
-// import { UserI } from "./types";
 
 /**
  * @type {import("./types").UserModel}
@@ -36,7 +34,7 @@ export const User = db.define(
       allowNull: true,
     },
     email: {
-      type: STRING(256),
+      type: DataTypes.STRING(256),
       allowNull: false,
       validate: {
         isEmail: {

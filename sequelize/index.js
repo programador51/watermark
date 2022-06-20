@@ -7,13 +7,3 @@ const db = new Sequelize("onlynudes", "root", null, {
 });
 
 export default db;
-
-// eslint-disable-next-line import/no-anonymous-default-export
-// export default async function () {
-//   try {
-//     const sequelize = await db.authenticate();
-//     return sequelize;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
