@@ -7,9 +7,13 @@ import { AlbumsEvidence } from "../../sequelize/album/evidence";
 User.hasMany(Customer, {
   foreignKey: "user",
 });
-Customer.hasMany(User, {
-  foreignKey: "id",
-});
+// Customer.hasMany(User, {
+//   foreignKey: "id",
+// });
+
+// Customer.hasMany(Album, {
+//   foreignKey: "id",
+// });
 
 RefreshToken.hasOne(User, {
   foreignKey: "id",
@@ -17,6 +21,12 @@ RefreshToken.hasOne(User, {
 
 Album.hasOne(Customer, {
   foreignKey: "id",
+  sourceKey: "customerId",
+});
+
+Customer.hasOne(Album, {
+  foreignKey: "customerId",
+  sourceKey: "id",
 });
 
 Album.hasOne(User, {
@@ -29,6 +39,7 @@ AlbumsEvidence.hasOne(Album, {
 
 export const sequelize = {
   User,
-  Customer,
   RefreshToken,
+  Album,
+  Customer,
 };

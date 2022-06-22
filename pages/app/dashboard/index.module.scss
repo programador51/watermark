@@ -27,3 +27,14 @@
     font-size: 12.996px;
   }
 }
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55vh;
+  flex-direction: column;
+  p {
+    margin: 1rem 0 0 0;
+  }
+}

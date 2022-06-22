@@ -28,6 +28,8 @@ export default function useSession({
           console.log(error);
         }
       }
+
+      console.log("validando token interno...");
     })();
   }, []);
 }

@@ -18,23 +18,55 @@ export default function Layout({ children }) {
   });
 
   useEffect(() => {
-    if (status === "authenticated") {
-      setState({
-        status,
-        user: {
-          email: data.user.email,
-          name: data.user.name,
-          image: data.user.image,
-        },
-      });
-    }
+    (async function () {
+      if (status === "authenticated") {
+        setState({
+          status,
+          user: {
+            email: data.user.email,
+            name: data.user.name,
+            image: data.user.image,
+          },
+        });
+      }
 
-    if (status === "unauthenticated") {
-      setState({
-        user: null,
-        status,
-      });
-    }
+      try {
+        const resToken = await fetch(
+          `${process.env.NEXT_PUBLIC_URL_BACKEND}/app`,
+          {
+            credentials: "include",
+            method: "GET",
+          }
+        );
+
+        /**
+         * Information of the authentication
+         * @type {import("./types").JwtAuthI}
+         */
+        const { isAuthenticated, message } = await resToken.json();
+
+        if (!isAuthenticated) {
+          setState({
+            user: null,
+            status: "unauthenticated",
+          });
+          return;
+        }
+      } catch (error) {
+        setState({
+          user: null,
+          status: "unauthenticated",
+        });
+        return;
+      }
+
+      if (status === "unauthenticated") {
+        setState({
+          user: null,
+          status,
+        });
+      }
+    })();
   }, [data, status]);
 
   return (

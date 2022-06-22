@@ -18,6 +18,7 @@ const middleware = (controller) => {
     if (!accessToken || !refreshToken) {
       return res.status(403).json({
         message: "Inicia sesión para acceder a la información",
+        isAuthenticated: false,
       });
     }
 
@@ -67,6 +68,7 @@ const middleware = (controller) => {
 
         return res.status(403).json({
           message: "Inicia sesión para acceder a la información",
+          isAuthenticated: false,
         });
       } catch (error) {
         // Invalid refresh token
@@ -75,6 +77,7 @@ const middleware = (controller) => {
         res.status(500).json({
           message:
             "El servidor esta caído. Mantente informado en cuando esto se arregle :(",
+          isAuthenticated: false,
         });
       }
     }

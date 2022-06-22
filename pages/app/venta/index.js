@@ -5,6 +5,7 @@ import { Dropzone, FileItem, FullScreenPreview } from "@dropzone-ui/react";
 import Canvas from "./Canvas";
 import { useSession } from "next-auth/react";
 import App from "..";
+import { useEffect } from "react";
 
 export default function Venta() {
   /**
