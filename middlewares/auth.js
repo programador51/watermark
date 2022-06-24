@@ -24,7 +24,16 @@ const middleware = (controller) => {
 
     try {
       // Valid access token
-      jwt.verify(accessToken, process.env.SECRET_SIGN_JWT);
+      const user = jwt.verify(accessToken, process.env.SECRET_SIGN_JWT);
+
+      req = {
+        ...req,
+        body: {
+          ...req.body,
+          user,
+        },
+      };
+
       return controller(req, res);
     } catch (error) {
       // Expired access token
@@ -33,8 +42,6 @@ const middleware = (controller) => {
           refreshToken,
           process.env.SECRET_SIGN_JWT
         );
-
-        // console.log("rererererere", signedRefreshToken);
 
         const refreshTokenDb = await sequelize.RefreshToken.findOne({
           where: {
@@ -62,6 +69,14 @@ const middleware = (controller) => {
             res,
             httpOnly: true,
           });
+
+          req = {
+            ...req,
+            body: {
+              ...req.body,
+              user: signedRefreshToken,
+            },
+          };
 
           return controller(req, res);
         }

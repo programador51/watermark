@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { saveAs } from "file-saver";
+import JSZip from "jszip";
+import mime from "mime";
 
 const MySwal = withReactContent(Swal);
 
@@ -16,6 +18,10 @@ export default function useWatermark({
   watermarkLevel = "low",
   sizeWatermark = 30,
 }) {
+  /**
+   * Information of the files
+   * @type {[import("pages/app/venta/Canvas/types").CanvasI[],()=>void]}
+   */
   const [canvas, setCanvas] = useState([]);
 
   const [configuration, setConfiguration] = useState({
@@ -150,12 +156,48 @@ export default function useWatermark({
     })();
   }, [canvas, configuration]);
 
-  const downloadWatermarkedImages = () => {
-    canvas.forEach((canva) => {
-      const domCanvas = document.getElementById(canva.idCanvas);
-      domCanvas.toBlob((blob) => {
-        saveAs(blob, canva.idCanvas);
-      });
+  const downloadWatermarkedImages = async () => {
+    const idAlbum = window.crypto.randomUUID();
+
+    const zip = new JSZip();
+
+    const photos = zip.folder(idAlbum);
+
+    const canvasConvertion = canvas.map(async (canva) => {
+      async function getBlobCanvas() {
+        /**
+         * Canvas HTML
+         * @type {HTMLCanvasElement}
+         */
+        const domCanvas = document.getElementById(canva.idCanvas);
+
+        /**
+         * Blob from the canvas
+         * @type {Blob}
+         */
+        const blobCanvas = await new Promise((resolve, reject) => {
+          domCanvas.toBlob((blob) => {
+            resolve(blob);
+          });
+        });
+
+        return blobCanvas;
+      }
+      const blob = await getBlobCanvas();
+      return blob;
+    });
+
+    const files = await Promise.all(canvasConvertion);
+
+    files.forEach((blob, i) => {
+      photos.file(
+        `${canvas[i].idCanvas}.${mime.getExtension(blob.type)}`,
+        blob
+      );
+    });
+
+    zip.generateAsync({ type: "blob" }).then(function (content) {
+      saveAs(content, `${idAlbum}.zip`);
     });
   };
 
@@ -171,15 +213,12 @@ export default function useWatermark({
           <p style={{ color: "black" }}>
             Al confirmar la descarga se creara el log de tracking. Esta
             información{" "}
-            <b style={{ color: "black" }}>ya no podra ser cambiada</b> con el
-            fin de poder dar un seguimiento sin informacion
-            tergiversada/alterada de posibles filtraciones dentro de plataformas
-            fuera de las permitidas por el creador.
+            <b style={{ color: "black" }}>ya no podra ser cambiada</b>
           </p>
           <p style={{ color: "black", margin: "10px 0 0 0;" }}>
-            <b style={{ color: "black" }}>Nota:</b> Ninguna imagen es enviada a
-            travez de internet con el fin de salvar guardar el derecho
-            intelectual de las imagenes
+            <b style={{ color: "black" }}>Nota:</b> Se creara un archivo zip con
+            contraseña que contendra las imágenes cargadas, esta sera borrada si
+            no hay actividad de descarga en el trascurso de 1 semana
           </p>
         </>
       ),
