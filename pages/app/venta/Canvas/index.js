@@ -2,7 +2,7 @@ import Button from "pages/atoms/Button";
 import React from "react";
 import styles from "./index.module.scss";
 import useWatermark from "pages/customHooks/useWatermak";
-
+import Chrome from "@uiw/react-color-chrome";
 /**
  * Component in order to put the watermark to each file image uploaded
  * @param {import("./types").PropsI} props
@@ -63,11 +63,17 @@ export default function Canvas({
 
           <div className={styles.color}>
             <p className={styles.label}>Color</p>
+            <Chrome
+              color={configuration.colorWatermark.uuid}
+              // placement={GithubPlacement.Right}
+              onChange={({ hexa }) => updateColorWatermark(hexa)}
+            />
+            {/* <p className={styles.label}>Color</p>
             <input
               type="color"
               value={configuration.colorWatermark.uuid}
               onChange={(e) => updateColorWatermark(e.target.value)}
-            />
+            /> */}
           </div>
 
           <p className={styles.label}>Agresividad</p>

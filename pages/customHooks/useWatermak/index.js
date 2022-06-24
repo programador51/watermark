@@ -4,6 +4,7 @@ import withReactContent from "sweetalert2-react-content";
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import mime from "mime";
+import { publishFilesToGoFile } from "helpers/gofile";
 
 const MySwal = withReactContent(Swal);
 
@@ -196,9 +197,18 @@ export default function useWatermark({
       );
     });
 
-    zip.generateAsync({ type: "blob" }).then(function (content) {
-      saveAs(content, `${idAlbum}.zip`);
+    /**
+     * Zipped files
+     * @type {Blob}
+     */
+    const blobZip = await new Promise((resolve, reject) => {
+      zip.generateAsync({ type: "blob" }).then(function (content) {
+        saveAs(content, `${idAlbum}.zip`);
+        resolve(content);
+      });
     });
+
+    // const { data, status } = await publishFilesToGoFile(blobZip, idAlbum);
   };
 
   const promptDownloadConfirmation = () =>
