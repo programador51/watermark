@@ -5,6 +5,8 @@ import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import mime from "mime";
 import { publishFilesToGoFile } from "helpers/gofile";
+import { createAlbum } from "helpers/apis/sell";
+import useNavigation from "../useNavigation";
 
 const MySwal = withReactContent(Swal);
 
@@ -25,10 +27,16 @@ export default function useWatermark({
    */
   const [canvas, setCanvas] = useState([]);
 
+  const [notes, setNotes] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { redirectToDashboard } = useNavigation();
+
   const [configuration, setConfiguration] = useState({
     colorWatermark: {
       uuid: "#5e5e5e66",
-      enterprise: "black",
+      enterprise: "#000000",
     },
     watermarkLevel: watermarkLevel,
     watermark,
@@ -44,6 +52,20 @@ export default function useWatermark({
     setConfiguration({
       ...configuration,
       watermark: text,
+    });
+
+  /**
+   * Update the color to put on the enterprise
+   * @param {string} enterprise - Color
+   * @returns {void}
+   */
+  const updateColorEnterprise = (enterprise) =>
+    setConfiguration({
+      ...configuration,
+      colorWatermark: {
+        ...configuration.colorWatermark,
+        enterprise,
+      },
     });
 
   /**
@@ -158,6 +180,8 @@ export default function useWatermark({
   }, [canvas, configuration]);
 
   const downloadWatermarkedImages = async () => {
+    setIsLoading(true);
+
     const idAlbum = window.crypto.randomUUID();
 
     const zip = new JSZip();
@@ -208,6 +232,22 @@ export default function useWatermark({
       });
     });
 
+    const wasAdded = await createAlbum(
+      idAlbum,
+      canvas.map((canva) => canva.idCanvas),
+      notes
+    );
+
+    if (wasAdded) {
+      MySwal.fire({
+        title: "Venta creada",
+        text: "Puedes consultar la informacion",
+      });
+
+      redirectToDashboard();
+    }
+
+    setIsLoading(false);
     // const { data, status } = await publishFilesToGoFile(blobZip, idAlbum);
   };
 
@@ -226,9 +266,18 @@ export default function useWatermark({
             <b style={{ color: "black" }}>ya no podra ser cambiada</b>
           </p>
           <p style={{ color: "black", margin: "10px 0 0 0;" }}>
-            <b style={{ color: "black" }}>Nota:</b> Se creara un archivo zip con
-            contraseña que contendra las imágenes cargadas, esta sera borrada si
-            no hay actividad de descarga en el trascurso de 1 semana
+            <hr style={{ margin: "10px 0" }} />
+            <b style={{ color: "black" }}>Nota</b>
+            <ol style={{ color: "black" }}>
+              <li style={{ color: "black" }}>
+                Los archivos multimedia solo duraran 1 día para ser descargados,
+                despue de estos seran borrados
+              </li>
+              <li style={{ color: "black" }}>
+                Las evidencias de la compra y marcas de agua siempre estaran
+                registrados
+              </li>
+            </ol>
           </p>
         </>
       ),
@@ -306,6 +355,10 @@ export default function useWatermark({
     updateColorWatermark,
     updateDimensionsImage,
     updateWatermarkLevel,
+    updateColorEnterprise,
     isChecked,
+    notes,
+    setNotes,
+    isLoading,
   };
 }

@@ -6,6 +6,7 @@ import Button from "pages/atoms/Button";
 import Link from "next/link";
 import { SpinnerDotted } from "spinners-react";
 import App from "..";
+import DashboardItem from "pages/molecules/DashboardItem";
 
 export default function Dashboard() {
   /**
@@ -60,11 +61,7 @@ export default function Dashboard() {
           ) : (
             <div className={styles.sells}>
               {sells.map((sell) => (
-                <article className={styles.sell} key={sell.id}>
-                  <p>{sell.id}</p>
-                  <time>{sell.creationDate}</time>
-                  <span>{sell.Customer.name}</span>
-                </article>
+                <DashboardItem sell={sell} key={sell.id} />
               ))}
             </div>
           )}

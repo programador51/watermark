@@ -5,4 +5,11 @@
   border-radius: 5.004px;
   width: 100%;
   cursor: pointer;
+  &:disabled {
+    background-color: var(--purple);
+    cursor: not-allowed;
+    color: var(--purpleDisabled);
+    font-weight: bold;
+    text-decoration: line-through;
+  }
 }

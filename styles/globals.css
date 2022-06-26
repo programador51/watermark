@@ -10,6 +10,7 @@
 
 :root {
   --purple: hsl(289, 22%, 25%);
+  --purpleDisabled: hsl(0, 0%, 87%);
   --purpleBg: hsl(300, 9%, 41%);
   --primaryFont: "Umunu";
 }
@@ -20,6 +21,10 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+body {
+  background-color: rgb(62, 62, 62);
 }
 
 a {
@@ -38,4 +43,37 @@ a {
   font-family: "Filxgirl";
   font-size: 1.667rem;
   margin: 0 0.833rem;
+}
+
+input {
+  color: var(--purple);
+}
+
+input[type="text"] {
+  padding: 0.556rem;
+}
+
+.requiredInput::after {
+  content: "*";
+  color: red;
+}
+
+.invalidInput {
+  border: 2px solid red;
+}
+
+.ql-editor {
+  min-height: 500px;
+}
+
+.ql-editor > * {
+  color: rgb(247, 247, 247);
+}
+
+.quil > * {
+  background-color: rgb(33, 33, 33);
+}
+
+.ql-toolbar {
+  background-color: white;
 }

@@ -54,6 +54,8 @@
 .sameLine {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .creatorWatermark {
@@ -62,4 +64,46 @@
   width: 100%;
   border-radius: 0.278rem;
   border: none;
+}
+
+.configurationCollpase {
+  padding: 5px 10px;
+  -webkit-box-shadow: 7px -1px 18px -7px rgba(0, 0, 0, 0.62);
+  box-shadow: 7px -1px 18px -7px rgba(0, 0, 0, 0.62);
+  margin: 0 10px 10px 10px;
+  border-radius: 5px;
+  cursor: default;
+  &:hover {
+    font-weight: bold;
+  }
+}
+
+.editor {
+  min-height: 500px;
+}
+
+.downloadButtons {
+  border: 0.083rem solid white;
+  border-style: solid none none none;
+  position: sticky;
+  bottom: 0;
+  background-color: var(--purpleBg);
+  z-index: 30;
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  * {
+    margin: 5px;
+  }
+}
+
+.containerOptions {
+  min-height: 47vh;
+  display: flex;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  flex-direction: column;
+  justify-content: space-between;
 }

@@ -22,4 +22,11 @@ export interface useWatermarkValuesI {
     updateDimensionsImage: (width: number, height: number, index: number) => void,
     updateWatermarkLevel: (level: WatermarkLevel) => void,
     isChecked: boolean,
+    /**
+     * Update the color to use for the left bottom corner
+     */
+    updateColorEnterprise: (enterprise: string) => void;
+    notes: string;
+    setNotes: (notes: string) => void;
+    isLoading: boolean;
 }

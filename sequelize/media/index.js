@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
-import db from "../../../sequelize";
+import db from "../../sequelize";
 
-export const AlbumsEvidence = db.define(
-  "AlbumsEvidence",
+export const Media = db.define(
+  "Media",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -10,11 +10,11 @@ export const AlbumsEvidence = db.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    notes: {
-      type: DataTypes.TEXT("long"),
-      allowNull: true,
-    },
     albumsId: {
+      type: DataTypes.STRING(256),
+      allowNull: false,
+    },
+    uuid: {
       type: DataTypes.STRING(256),
       allowNull: false,
     },

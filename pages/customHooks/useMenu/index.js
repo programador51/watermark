@@ -15,7 +15,11 @@ export default function useMenu() {
 
   const redirectToDashboard = () => {
     navigation.redirectToDashboard();
+    closeMenu();
+  };
 
+  const redirectToConfiguration = () => {
+    navigation.redirectToConfiguration();
     closeMenu();
   };
 
@@ -23,6 +27,7 @@ export default function useMenu() {
     showExpand,
     redirectToHome,
     setShowExpand,
+    redirectToConfiguration,
     redirectToDashboard,
   };
 }

@@ -2,10 +2,15 @@ import { sequelize } from "../../../../sequelize/querys";
 import auth from "middlewares/auth.js";
 
 async function handler(req, res) {
+  /**
+   * @type {import("middlewares/types").JwtI}
+   */
+  const { user } = req.body;
+
   try {
     const albums = await sequelize.Album.findAll({
       where: {
-        userId: 1,
+        userId: user.id,
       },
       attributes: ["id", "creationDate"],
       include: [

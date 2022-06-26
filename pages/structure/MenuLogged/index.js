@@ -15,8 +15,13 @@ import { AuthContext } from "../Layout";
  * @returns {JSX.Element}
  */
 export default function Menu({ title = "" }) {
-  const { redirectToHome, showExpand, setShowExpand, redirectToDashboard } =
-    useMenu();
+  const {
+    redirectToHome,
+    showExpand,
+    setShowExpand,
+    redirectToDashboard,
+    redirectToConfiguration,
+  } = useMenu();
 
   useSession({
     redirectOnUnauthorized: false,
@@ -85,7 +90,7 @@ export default function Menu({ title = "" }) {
                   <button>
                     <Icon icon="creditCard" /> Pagos
                   </button>
-                  <button>
+                  <button onClick={redirectToConfiguration}>
                     <Icon icon="engine" /> Configuracion
                   </button>
                   <button>

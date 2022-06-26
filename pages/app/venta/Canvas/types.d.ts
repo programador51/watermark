@@ -1,3 +1,5 @@
+import { useWatermarkValuesI } from "pages/customHooks/useWatermak/types";
+
 /**
  * Indicates the level of watermark to use on the picture
  */
@@ -38,4 +40,8 @@ export interface CanvasI {
         height: number
     }
     file: File;
+}
+
+export interface CanvasContext extends useWatermarkValuesI {
+
 }

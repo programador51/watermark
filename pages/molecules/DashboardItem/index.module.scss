@@ -1,0 +1,28 @@
+.sell {
+  border-radius: 0.278rem;
+  background-color: var(--purple);
+  margin: 0.833rem;
+  padding: 0.556rem;
+  box-sizing: border-box;
+  span {
+    &::before {
+      content: "🔹";
+    }
+  }
+  * {
+    font-size: 12.996px;
+  }
+  p:hover {
+    text-decoration: underline;
+    cursor: default;
+  }
+}
+
+.infoSell {
+  * {
+    color: var(--purple);
+  }
+  img {
+    max-height: 250px;
+  }
+}

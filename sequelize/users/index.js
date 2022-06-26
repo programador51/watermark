@@ -42,6 +42,10 @@ export const User = db.define(
         },
       },
     },
+    goFileToken: {
+      type: DataTypes.STRING(256),
+      allowNull: true,
+    },
   },
   {
     timestamps: false,

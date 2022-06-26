@@ -1,9 +1,16 @@
-// import { sequelize } from "../../../../sequelize/querys";
-// import { setCookies } from "cookies-next";
 import { sequelize } from "../../../../sequelize/querys";
 import auth from "middlewares/auth.js";
+// import config from "./config";
+
+export const config = { api: { bodyParser: { sizeLimit: "25mb" } } };
 
 async function handler(req, res) {
+  /**
+   * DTO in order to create an album
+   * @type {import("./types").DtoSell}
+   */
+  const { id, idsPhotos, notes, user } = req.body;
+
   try {
     if (req.method !== "POST") {
       return res.status(400).json({
@@ -12,20 +19,41 @@ async function handler(req, res) {
       });
     }
 
-    console.log("Desde controlador", req.body.user);
-
-    sequelize.Album.create({
-      id: "??",
-      userId: req.body.user.id,
+    await sequelize.Album.create({
+      id,
+      userId: user.id,
       creationDate: new Date(),
       customerId: null,
     });
 
+    const querysEvidenciaMedia = idsPhotos.map((uuid) =>
+      (async function () {
+        await sequelize.Media.create({
+          id: null,
+          albumsId: id,
+          uuid,
+        });
+      })()
+    );
+
+    await Promise.all([
+      ...querysEvidenciaMedia,
+      (async function () {
+        sequelize.AlbumsEvidence.create({
+          id: null,
+          notes,
+          albumsId: id,
+        });
+      })(),
+    ]);
+
     return res.status(200).json({
-      message: "Venta/Album creado",
+      message: "Venta creada",
       wasCreated: true,
     });
   } catch (error) {
+    console.log(error);
+
     return res.status(500).json({
       message: process.env.ERROR_MESSAGE,
       wasCreated: false,
@@ -33,4 +61,5 @@ async function handler(req, res) {
   }
 }
 
-export default auth(handler);
+export default auth(handler, false);
+// export default handler;

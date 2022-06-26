@@ -5,6 +5,14 @@ import { sequelize } from "../sequelize/querys";
 
 const middleware = (controller) => {
   return async (req, res) => {
+    let body;
+
+    try {
+      body = JSON.parse(req.body);
+    } catch (error) {
+      body = req.body;
+    }
+
     const accessToken = getCookie("onlynudesaccesstoken", {
       req,
       res,
@@ -29,7 +37,7 @@ const middleware = (controller) => {
       req = {
         ...req,
         body: {
-          ...req.body,
+          ...body,
           user,
         },
       };
@@ -73,7 +81,7 @@ const middleware = (controller) => {
           req = {
             ...req,
             body: {
-              ...req.body,
+              ...body,
               user: signedRefreshToken,
             },
           };
@@ -89,7 +97,7 @@ const middleware = (controller) => {
         // Invalid refresh token
         console.log(error);
 
-        res.status(500).json({
+        return res.status(500).json({
           message:
             "El servidor esta caído. Mantente informado en cuando esto se arregle :(",
           isAuthenticated: false,

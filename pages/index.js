@@ -1,6 +1,7 @@
 import Button from "./atoms/Button";
 import styles from "./styles.module.scss";
 import Content from "./structure/LayoutContent";
+import "react-quill/dist/quill.snow.css";
 
 export default function Home() {
   return (

@@ -3,17 +3,12 @@ import { Customer } from "../../sequelize/customers";
 import { RefreshToken } from "../../sequelize/refreshtokens";
 import { Album } from "../../sequelize/album";
 import { AlbumsEvidence } from "../../sequelize/album/evidence";
+import { Media } from "../../sequelize/media";
+// import { AlbumsEvidence } from "../../sequelize/album/evidence"
 
 User.hasMany(Customer, {
   foreignKey: "user",
 });
-// Customer.hasMany(User, {
-//   foreignKey: "id",
-// });
-
-// Customer.hasMany(Album, {
-//   foreignKey: "id",
-// });
 
 RefreshToken.hasOne(User, {
   foreignKey: "id",
@@ -35,6 +30,12 @@ Album.hasOne(User, {
 
 AlbumsEvidence.hasOne(Album, {
   foreignKey: "id",
+  sourceKey: "albumsId",
+});
+
+Media.hasOne(Album, {
+  foreignKey: "id",
+  sourceKey: "uuid",
 });
 
 export const sequelize = {
@@ -42,4 +43,6 @@ export const sequelize = {
   RefreshToken,
   Album,
   Customer,
+  Media,
+  AlbumsEvidence,
 };

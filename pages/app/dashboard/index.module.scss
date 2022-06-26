@@ -18,13 +18,17 @@
   margin: 0.833rem;
   padding: 0.556rem;
   box-sizing: border-box;
-  time {
-    &::after {
+  span {
+    &::before {
       content: "🔹";
     }
   }
   * {
     font-size: 12.996px;
+  }
+  p:hover {
+    text-decoration: underline;
+    cursor: default;
   }
 }
 
