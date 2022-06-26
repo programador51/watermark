@@ -21,6 +21,7 @@ export default function Menu({ title = "" }) {
     setShowExpand,
     redirectToDashboard,
     redirectToConfiguration,
+    redirectToSubscription,
   } = useMenu();
 
   useSession({
@@ -87,8 +88,8 @@ export default function Menu({ title = "" }) {
                       Mi cuenta
                     </span>
                   </summary>
-                  <button>
-                    <Icon icon="creditCard" /> Pagos
+                  <button onClick={redirectToSubscription}>
+                    <Icon icon="creditCard" /> Subscripcion
                   </button>
                   <button onClick={redirectToConfiguration}>
                     <Icon icon="engine" /> Configuracion
@@ -104,10 +105,10 @@ export default function Menu({ title = "" }) {
                 <button onClick={redirectToDashboard}>
                   <Icon icon="dashboard" /> Dashboard
                 </button>
-                <button>
+                {/* <button>
                   <Icon icon="user" />
                   Clientes
-                </button>
+                </button> */}
               </div>
             )}
           </>

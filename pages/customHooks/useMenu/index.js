@@ -23,11 +23,17 @@ export default function useMenu() {
     closeMenu();
   };
 
+  const redirectToSubscription = () => {
+    navigation.redirectToSubscription();
+    closeMenu();
+  };
+
   return {
     showExpand,
     redirectToHome,
     setShowExpand,
     redirectToConfiguration,
     redirectToDashboard,
+    redirectToSubscription,
   };
 }

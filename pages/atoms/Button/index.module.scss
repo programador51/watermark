@@ -4,12 +4,16 @@
   padding: 0.556rem;
   border-radius: 5.004px;
   width: 100%;
-  cursor: pointer;
+  cursor: default;
   &:disabled {
     background-color: var(--purple);
     cursor: not-allowed;
     color: var(--purpleDisabled);
     font-weight: bold;
     text-decoration: line-through;
+  }
+  transition: background 0.15s ease;
+  &:hover {
+    background-color: #907197;
   }
 }
