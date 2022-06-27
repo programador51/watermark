@@ -1,8 +1,12 @@
 import { sequelize } from "../../../../sequelize/querys";
 import auth from "middlewares/auth.js";
+import axios from "axios";
+import { getAccessTokenPaypal } from "helpers/apis/subscription";
 
 async function handler(req, res) {
   const { method } = req;
+
+  console.log(method);
 
   /**
    * Check if the current account is premium
@@ -38,9 +42,54 @@ async function handler(req, res) {
       });
 
     case "PUT":
-      return res.status(200).json({
-        message: "Tu cuenta ha sido actualizada a Premium",
-      });
+      try {
+        const { access_token } = await getAccessTokenPaypal();
+
+        const dto = {
+          intent: "CAPTURE",
+          purchase_units: [
+            {
+              amount: {
+                currency_code: "MXN",
+                value: "99.99",
+              },
+            },
+          ],
+          application_context: {
+            brand_name: "Safe Nudes MX",
+            landing_page: "NO_PREFERENCE",
+            return_url: "http://localhost:3000",
+            cancel_url: "http://localhost:3000",
+          },
+        };
+        /**
+         * @type {{data:import("helpers/apis/subscription/types").DtoPaypalOc}}
+         */
+        const { data } = await axios.post(
+          `${process.env.PAYPAL_API}/v2/checkout/orders`,
+          dto,
+          {
+            headers: {
+              Authorization: `Bearer ${access_token}`,
+            },
+          }
+        );
+
+        return res.status(200).json({
+          ...data,
+        });
+      } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+          message: "No se pudo realizar la compra de la subscripcion premium",
+          error,
+        });
+      }
+
+    // return res.status(200).json({
+    //   message: "Tu cuenta ha sido actualizada a Premium",
+    // });
 
     default:
       return res.status(400).json({

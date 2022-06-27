@@ -1,0 +1,20 @@
+.paypalButton {
+  background-color: #f6c657;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: none;
+  padding: 0.417rem 0;
+  img {
+    max-height: 1.667rem;
+  }
+  transition: 0.15s ease-in;
+  &:hover {
+    background-color: #ffb60e;
+  }
+}
+
+.loading {
+  margin: 20px 0;
+}

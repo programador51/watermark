@@ -7,6 +7,8 @@ import { SpinnerDotted } from "spinners-react";
 import Button from "pages/atoms/Button";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import PaypalButton from "pages/atoms/PaypalButton";
+import DivisorHr from "pages/atoms/DivisorHr";
 
 const MySwal = withReactContent(Swal);
 
@@ -38,6 +40,12 @@ export default function Subscription() {
               {!subscription.isSubscribed ? (
                 <>
                   <p>Parece que no tienes premium 😭</p>
+
+                  <DivisorHr />
+
+                  <p>Métodos de pago</p>
+
+                  <PaypalButton />
                 </>
               ) : (
                 <>
