@@ -9,7 +9,11 @@ export default function PaypalButton() {
   const handleClick = async () => {
     setIsOnProcess(true);
 
-    await purchaseSubscription();
+    const { id, links, status } = await purchaseSubscription();
+
+    const linkRedirect = links.find((link) => link.rel === "approve");
+
+    window.location.href = linkRedirect.href;
 
     setIsOnProcess(false);
   };

@@ -6,8 +6,6 @@ import { getAccessTokenPaypal } from "helpers/apis/subscription";
 async function handler(req, res) {
   const { method } = req;
 
-  console.log(method);
-
   /**
    * Check if the current account is premium
    * @param {string|null} subscriptionDate - Date until the user will be premium user
@@ -59,7 +57,7 @@ async function handler(req, res) {
             brand_name: "Safe Nudes MX",
             landing_page: "NO_PREFERENCE",
             return_url: "http://localhost:3000",
-            cancel_url: "http://localhost:3000",
+            cancel_url: `${process.env.URL_APP}/app/subscripcion`,
           },
         };
         /**
