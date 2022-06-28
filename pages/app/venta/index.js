@@ -6,6 +6,9 @@ import Canvas from "./Canvas";
 import { useSession } from "next-auth/react";
 import App from "..";
 import { useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "pages/structure/Layout";
+import useNavigation from "pages/customHooks/useNavigation";
 
 export default function Venta() {
   /**
@@ -13,7 +16,16 @@ export default function Venta() {
    */
   const [files, setFiles] = useState([]);
   const [imageSrc, setImageSrc] = useState(undefined);
+  const { redirectToSubscription } = useNavigation();
+
   const { data } = useSession();
+
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (user === undefined) return;
+    if (user.subscription < new Date()) redirectToSubscription();
+  }, [user]);
 
   /**
    * List of files uploaded

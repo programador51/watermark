@@ -2,6 +2,7 @@ export interface UserI {
     email: string;
     name: string;
     image: string;
+    subscription: Date;
 }
 
 export interface LayoutContext {

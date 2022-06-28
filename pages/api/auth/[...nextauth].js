@@ -102,13 +102,16 @@ const nextAuthOptions = (req, res) => ({
     },
     async redirect({ url, baseUrl }) {
       // console.log("redirect");
+      console.log(new Date());
       return baseUrl;
     },
     async session({ session, user, token }) {
+      console.log(new Date());
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       // console.log(token);
+      console.log(new Date());
       return token;
     },
   },

@@ -70,3 +70,34 @@ export async function getAccessTokenPaypal() {
     );
   }
 }
+
+/**
+ * Attempt confirm the payment done by the user on paypal in order to receive the money and update the account tier to premium
+ * @param {string} token - Token of the transaction
+ * @param {string} PayerID - Id of the transaction for paypal
+ * @returns {import("./types").CreateOrderResI} Information of the confirmation
+ */
+export async function attemptConfirmPayment(token, PayerID) {
+  try {
+    const { data } = await axios.post(
+      "/api/app/subscription",
+      {
+        token,
+        PayerID,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+
+    return {
+      status: 200,
+      data,
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      data: null,
+    };
+  }
+}

@@ -1,6 +1,7 @@
 import React, { createContext, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import { getUserSessionInfo } from "helpers/apis/user";
 
 /**
  * Context for the auth process
@@ -20,12 +21,15 @@ export default function Layout({ children }) {
   useEffect(() => {
     (async function () {
       if (status === "authenticated") {
+        const user = await getUserSessionInfo(data.user.email);
+
         setState({
           status,
           user: {
             email: data.user.email,
             name: data.user.name,
             image: data.user.image,
+            subscription: new Date(user.subscrption),
           },
         });
       }

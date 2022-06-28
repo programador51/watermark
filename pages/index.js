@@ -14,10 +14,15 @@ export default function Home() {
         </p>
 
         <div className={styles.gallery}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/model-1.png" alt="model-1" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/model-2.png" alt="model-1" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/model-3.png" alt="model-1" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/model-4.png" alt="model-1" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/model-5.png" alt="model-1" />
         </div>
 

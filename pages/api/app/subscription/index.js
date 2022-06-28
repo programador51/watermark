@@ -1,6 +1,7 @@
 import { sequelize } from "../../../../sequelize/querys";
 import auth from "middlewares/auth.js";
 import axios from "axios";
+import { setCookies, removeCookies } from "cookies-next";
 import { getAccessTokenPaypal } from "helpers/apis/subscription";
 
 async function handler(req, res) {
@@ -51,12 +52,14 @@ async function handler(req, res) {
                 currency_code: "MXN",
                 value: "99.99",
               },
+              description: "31 días de premium en Safe Nudes",
             },
           ],
+
           application_context: {
             brand_name: "Safe Nudes MX",
             landing_page: "NO_PREFERENCE",
-            return_url: "http://localhost:3000",
+            return_url: `${process.env.URL_APP}/app/procesando-pago`,
             cancel_url: `${process.env.URL_APP}/app/subscripcion`,
           },
         };
@@ -64,7 +67,7 @@ async function handler(req, res) {
          * @type {{data:import("helpers/apis/subscription/types").DtoPaypalOc}}
          */
         const { data } = await axios.post(
-          `${process.env.PAYPAL_API}/v2/checkout/orders`,
+          `${process.env.PAYPAL_API_V2}/checkout/orders`,
           dto,
           {
             headers: {
@@ -85,13 +88,87 @@ async function handler(req, res) {
         });
       }
 
-    // return res.status(200).json({
-    //   message: "Tu cuenta ha sido actualizada a Premium",
-    // });
+    case "POST":
+      /**
+       * @type {import("./get").CreateOrderDto}
+       */
+      const { token, PayerID, user: jwtUser } = req.body;
+
+      try {
+        const { access_token } = await getAccessTokenPaypal();
+
+        const { data } = await axios.post(
+          `${process.env.PAYPAL_API_V2}/checkout/orders/${token}/capture`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${access_token}`,
+            },
+          }
+        );
+
+        const durationPremium = new Date();
+        durationPremium.setDate(durationPremium.getDate() + 31);
+
+        await sequelize.User.update(
+          {
+            subscrption: `${durationPremium.getFullYear()}-${
+              durationPremium.getMonth() + 1
+            }-${durationPremium.getDate()}`,
+          },
+          {
+            where: {
+              id: jwtUser.id,
+            },
+          }
+        );
+
+        const userDb = sequelize.User.findOne({
+          where: {
+            id: jwtUser.id,
+          },
+        });
+
+        const accessToken = jwt.sign(
+          JSON.parse(JSON.stringify(userDb)),
+          process.env.SECRET_SIGN_JWT,
+          {
+            expiresIn: process.env.ACCESS_TOKEN_DURATION,
+          }
+        );
+
+        removeCookies(process.env.ACCESS_TOKEN_NAME, {
+          httpOnly: true,
+          req,
+          res,
+          path: "/",
+          domain: process.env.URL_APP,
+        });
+
+        setCookies(process.env.ACCESS_TOKEN_NAME, accessToken, {
+          req,
+          res,
+          httpOnly: true,
+        });
+
+        return res.status(200).json({
+          message:
+            "Cuenta actualizada a premium 🥳. Disfruta de los beneficios durante",
+          transaction: data,
+        });
+      } catch (error) {
+        console.log(error);
+
+        return res.status(200).json({
+          message:
+            "No se pudo realizar el pago. ¿Deseas re-intentar la transacion?",
+          error,
+        });
+      }
 
     default:
       return res.status(400).json({
-        message: "Solo se aceptan métodos GET y PUT",
+        message: "Solo se aceptan métodos GET/PUT/POST",
       });
   }
 }

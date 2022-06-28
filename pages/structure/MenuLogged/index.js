@@ -46,7 +46,7 @@ export default function Menu({ title = "" }) {
       >
         {!showExpand ? (
           <>
-            <h1 className="logo">Only Nudes</h1>
+            <h1 className="logo">Safe Nudes</h1>
             <button onClick={() => setShowExpand(!showExpand)}>
               <Icon icon="menu" />
             </button>

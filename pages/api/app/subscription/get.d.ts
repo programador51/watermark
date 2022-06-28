@@ -15,3 +15,8 @@ export interface ResGetSubscriptionI {
      */
     date: string;
 }
+
+export interface CreateOrderDto extends JwtI {
+    token: string;
+    PayerID: string;
+}

@@ -18,3 +18,8 @@ export interface PaypalLinkOcI {
     method: string;
     rel: string
 }
+
+export interface CreateOrderResI {
+    status: number;
+    data: object;
+}

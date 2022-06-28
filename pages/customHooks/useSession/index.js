@@ -8,7 +8,7 @@ export default function useSession({
   createAccountOnReadCookie = false,
 }) {
   const { status } = useContext(AuthContext);
-
+  AuthContext;
   const router = useRouter();
 
   useEffect(() => {
