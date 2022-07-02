@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import App from "pages/app";
+import App from "../../../pages/app";
 import Content from "pages/structure/LayoutContent";
 import GoFileToken from "pages/molecules/GoFileToken";
 import Button from "pages/atoms/Button";
