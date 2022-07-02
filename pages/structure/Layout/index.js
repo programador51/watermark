@@ -1,7 +1,6 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
-import { getUserSessionInfo } from "helpers/apis/user";
+import { getUserSessionInfo } from "../../../helpers/apis/user";
 
 /**
  * Context for the auth process

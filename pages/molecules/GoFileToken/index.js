@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Tooltip from "pages/atoms/Tooltip";
+import Tooltip from "../../../pages/atoms/Tooltip";
 import scss from "./styles.module.scss";
-import Icon from "pages/atoms/Icons";
+import Icon from "../../../pages/atoms/Icons";
 
 /**
  * Render an input in order to put the token for go file

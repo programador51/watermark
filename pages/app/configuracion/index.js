@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import App from "../../../pages/app";
-import Content from "pages/structure/LayoutContent";
-import GoFileToken from "pages/molecules/GoFileToken";
-import Button from "pages/atoms/Button";
-import { updateProfileConfiguration } from "helpers/apis/configuration";
+import Content from "../../../pages/structure/LayoutContent";
+import GoFileToken from "../../../pages/molecules/GoFileToken";
+import Button from "../../../pages/atoms/Button";
+import { updateProfileConfiguration } from "../../../helpers/apis/configuration";
 
 export default function ConfigurationProfile() {
   const [state, setState] = useState({
