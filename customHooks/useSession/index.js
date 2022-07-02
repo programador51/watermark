@@ -1,8 +1,7 @@
-import { AuthContext } from "pages/structure/Layout";
-import { useEffect } from "react";
-import { useContext } from "react";
+import { AuthContext } from "../../pages/structure/Layout";
+import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import { closeSession } from "helpers/apis/user";
+import { closeSession } from "../../helpers/apis/user";
 
 export default function useSession({
   redirectOnUnauthorized = true,
