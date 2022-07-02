@@ -45,7 +45,7 @@ const nextAuthOptions = (req, res) => ({
         //   html: "<b>Hello world?</b>", // html body
         // });
 
-        const userDb = await sequelize.User.findOne({
+        let userDb = await sequelize.User.findOne({
           where: {
             email: user.email,
             logInMethod: "facebook",
@@ -53,7 +53,7 @@ const nextAuthOptions = (req, res) => ({
         });
 
         if (userDb === null) {
-          sequelize.User.create({
+          userDb = await sequelize.User.create({
             defaultWatermark: `www.onlynudes.com/${user.id}`,
             logInMethod: "facebook",
             profilePicture: user.image,

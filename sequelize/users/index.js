@@ -5,7 +5,7 @@ import db from "../../sequelize";
  * @type {import("./types").UserModel}
  */
 export const User = db.define(
-  "User",
+  "user",
   {
     id: {
       type: DataTypes.INTEGER,

@@ -2,6 +2,7 @@ import { AuthContext } from "pages/structure/Layout";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { useRouter } from "next/router";
+import { closeSession } from "helpers/apis/user";
 
 export default function useSession({
   redirectOnUnauthorized = true,
@@ -10,6 +11,14 @@ export default function useSession({
   const { status } = useContext(AuthContext);
   AuthContext;
   const router = useRouter();
+
+  const handleCloseSession = async () => {
+    const wasClosed = await closeSession();
+
+    if (wasClosed) {
+      window.location.href = "/";
+    }
+  };
 
   useEffect(() => {
     if (status === "unauthenticated" && redirectOnUnauthorized) {
@@ -32,4 +41,8 @@ export default function useSession({
       console.log("validando token interno...");
     })();
   }, []);
+
+  return {
+    handleCloseSession,
+  };
 }

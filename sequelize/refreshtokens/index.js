@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import db from "../../sequelize";
 
 export const RefreshToken = db.define(
-  "RefreshToken",
+  "refreshtoken",
   {
     id: {
       type: DataTypes.INTEGER,

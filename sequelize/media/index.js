@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import db from "../../sequelize";
 
 export const Media = db.define(
-  "Media",
+  "media",
   {
     id: {
       type: DataTypes.INTEGER,

@@ -7,6 +7,7 @@ import { signIn } from "next-auth/react";
 import useMenu from "pages/customHooks/useMenu";
 import useSession from "pages/customHooks/useSession";
 import { AuthContext } from "../Layout";
+import Image from "next/image";
 
 /**
  * Render the menu when user is log in
@@ -24,12 +25,12 @@ export default function Menu({ title = "" }) {
     redirectToSubscription,
   } = useMenu();
 
-  useSession({
+  const { handleCloseSession } = useSession({
     redirectOnUnauthorized: false,
     createAccountOnReadCookie: false,
   });
 
-  const { status } = useContext(AuthContext);
+  const { status, user } = useContext(AuthContext);
 
   const attemptLogin = async (login) => {
     try {
@@ -54,6 +55,23 @@ export default function Menu({ title = "" }) {
         ) : (
           <>
             <div className={styles.containerMenuHeader}>
+              {status === "authenticated" ? (
+                <div className={styles.profileInfo}>
+                  <div className={styles.profilePicture}>
+                    <Image
+                      src={user.image}
+                      width={50}
+                      height={50}
+                      alt="profile_picture_user"
+                    />
+                  </div>
+                  <div className={styles.center}>
+                    <p>Facebook</p>
+                    <p>{user.email}</p>
+                  </div>
+                </div>
+              ) : null}
+
               <button onClick={() => setShowExpand(!showExpand)}>
                 <Icon icon="close" />
               </button>
@@ -91,14 +109,14 @@ export default function Menu({ title = "" }) {
                   <button onClick={redirectToSubscription}>
                     <Icon icon="creditCard" /> Subscripcion
                   </button>
-                  <button onClick={redirectToConfiguration}>
+                  {/* <button onClick={redirectToConfiguration}>
                     <Icon icon="engine" /> Configuracion
                   </button>
                   <button>
                     <Icon icon="login" />
                     Inicios de sesión
-                  </button>
-                  <button>
+                  </button> */}
+                  <button onClick={handleCloseSession}>
                     <Icon icon="logout" /> Cerrar sesión
                   </button>
                 </details>

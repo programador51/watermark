@@ -16,3 +16,19 @@ export async function getUserSessionInfo(email) {
     throw error;
   }
 }
+
+/**
+ * Close the session of the user
+ * @returns {boolean} True if the session was closed
+ */
+export const closeSession = async () => {
+  try {
+    await axios.get("/api/users/close-sessions", {
+      withCredentials: true,
+    });
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+};

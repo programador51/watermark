@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import db from "../../sequelize";
 
 export const Album = db.define(
-  "Album",
+  "album",
   {
     id: {
       type: DataTypes.INTEGER,
