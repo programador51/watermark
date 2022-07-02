@@ -1,4 +1,4 @@
-import { useWatermarkValuesI } from "pages/customHooks/useWatermak/types";
+import { useWatermarkValuesI } from "customHooks/useWatermak/types";
 
 /**
  * Indicates the level of watermark to use on the picture

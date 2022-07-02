@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useNavigation from "pages/customHooks/useNavigation";
+import useNavigation from "customHooks/useNavigation";
 
 export default function useProtectPath({
   isFetched = false,

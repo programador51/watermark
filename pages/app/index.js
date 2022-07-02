@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import useAuth from "pages/customHooks/useSession";
+import useAuth from "../../customHooks/useSession";
 import React from "react";
 
 export default function App({ children }) {

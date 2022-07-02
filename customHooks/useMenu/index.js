@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useNavigation from "pages/customHooks/useNavigation";
+import useNavigation from "customHooks/useNavigation";
 
 export default function useMenu() {
   const navigation = useNavigation();

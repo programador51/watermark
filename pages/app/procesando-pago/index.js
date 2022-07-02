@@ -9,7 +9,7 @@ import { attemptConfirmPayment } from "helpers/apis/subscription";
 import { useState } from "react";
 import PaypalButton from "pages/atoms/PaypalButton";
 import Button from "pages/atoms/Button";
-import useNavigation from "pages/customHooks/useNavigation";
+import useNavigation from "customHooks/useNavigation";
 
 export default function ProcessingPayment() {
   const { query } = useRouter();

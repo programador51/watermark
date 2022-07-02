@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { SpinnerDotted } from "spinners-react";
-import { useEffect } from "react";
 import { getSellInformation } from "helpers/apis/sell";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";

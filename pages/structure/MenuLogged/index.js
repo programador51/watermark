@@ -1,11 +1,10 @@
 import Icon from "pages/atoms/Icons";
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import styles from "./index.module.scss";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { signIn } from "next-auth/react";
-import useMenu from "pages/customHooks/useMenu";
-import useSession from "pages/customHooks/useSession";
+import useMenu from "customHooks/useMenu";
+import useSession from "customHooks/useSession";
 import { AuthContext } from "../Layout";
 import Image from "next/image";
 

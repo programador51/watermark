@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./index.module.scss";
-import useWatermark from "pages/customHooks/useWatermak";
+import useWatermark from "customHooks/useWatermak";
 import Customer from "./Customer";
 import { createContext } from "react";
 import ConfigurationPhotos from "./ConfigurationPhotos";

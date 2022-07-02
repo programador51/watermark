@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Content from "pages/structure/LayoutContent";
 import { Dropzone, FileItem, FullScreenPreview } from "@dropzone-ui/react";
 
 import Canvas from "./Canvas";
 import { useSession } from "next-auth/react";
 import App from "..";
-import { useEffect } from "react";
-import { useContext } from "react";
-import { AuthContext } from "pages/structure/Layout";
-import useNavigation from "pages/customHooks/useNavigation";
+import { AuthContext } from "../../structure/Layout";
+import useNavigation from "customHooks/useNavigation";
 
 export default function Venta() {
   /**
