@@ -6,11 +6,11 @@ import styles from "../index.module.scss";
 export default function Label() {
   const waterMarks = useContext(CanvasContext);
 
-  const showLeyendWatermark = waterMarks.configuration.showWatermark
+  const showLeyendWatermark = waterMarks?.configuration.showWatermark
     ? true
     : false;
 
-  return waterMarks === undefined ? null : (
+  return (
     <>
       <p className={styles.label}>Mostrar leyenda</p>
       <div className={styles.containerAgressiveWatermark}>
@@ -20,7 +20,7 @@ export default function Label() {
           name="showCreatorWatermark"
           value="1"
           checked={showLeyendWatermark ? true : false}
-          onChange={() => waterMarks.updateWatermarkShow(true)}
+          onChange={() => waterMarks?.updateWatermarkShow(true)}
         />
         <label htmlFor="showWatermark">Si</label>
 
@@ -30,7 +30,7 @@ export default function Label() {
           name="showCreatorWatermark"
           value="0"
           checked={showLeyendWatermark ? false : true}
-          onChange={() => waterMarks.updateWatermarkShow(false)}
+          onChange={() => waterMarks?.updateWatermarkShow(false)}
         />
         <label htmlFor="hideWatermark">No</label>
       </div>
@@ -42,8 +42,8 @@ export default function Label() {
             <input
               className={styles.creatorWatermark}
               type="text"
-              value={waterMarks.configuration.watermark}
-              onChange={(e) => waterMarks.updateWatermark(e.target.value)}
+              value={waterMarks?.configuration.watermark}
+              onChange={(e) => waterMarks?.updateWatermark(e.target.value)}
             />
           </div>
           <div
@@ -55,8 +55,8 @@ export default function Label() {
             <p className={styles.label}>Color leyenda</p>
 
             <Chrome
-              color={waterMarks.configuration.colorWatermark.enterprise}
-              onChange={({ hexa }) => waterMarks.updateColorEnterprise(hexa)}
+              color={waterMarks?.configuration.colorWatermark.enterprise}
+              onChange={({ hexa }) => waterMarks?.updateColorEnterprise(hexa)}
             />
           </div>
         </>

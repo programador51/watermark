@@ -34,8 +34,8 @@ export default function Customer() {
               ["clean"],
             ],
           }}
-          value={watermark.notes}
-          onChange={watermark.setNotes}
+          value={watermark?.notes}
+          onChange={watermark?.setNotes}
           placeholder="Adjunta toda la información necesaria una vez que hallas recibido informacion del pago, por ejemplo, fotos de la transferencia, numero del folio, banco emisor, recibo de paypal, etc. Con el fin de poder identificar la marca de agua con datos de la persona"
         />
       </div>

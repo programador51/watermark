@@ -7,9 +7,9 @@ import { SpinnerDotted } from "spinners-react";
 export default function Download() {
   const waterMarks = useContext(CanvasContext);
 
-  const canSave = !waterMarks.canvas.length <= 0 ? false : true;
+  const canSave = !waterMarks?.canvas.length <= 0 ? false : true;
 
-  return waterMarks.isLoading ? (
+  return waterMarks?.isLoading ? (
     <div
       style={{
         display: "flex",
@@ -26,11 +26,11 @@ export default function Download() {
     <div className={scss.downloadButtons}>
       <Button
         disabled={canSave}
-        onClick={waterMarks.promptDownloadConfirmation}
+        onClick={waterMarks?.promptDownloadConfirmation}
       >
         Descargar
       </Button>
-      <Button disabled={canSave} onClick={waterMarks.downloadRandomImage}>
+      <Button disabled={canSave} onClick={waterMarks?.downloadRandomImage}>
         Descargar una previa
       </Button>
     </div>

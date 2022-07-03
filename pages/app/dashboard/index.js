@@ -61,7 +61,7 @@ export default function Dashboard() {
           ) : (
             <div className={styles.sells}>
               {sells.map((sell) => (
-                <DashboardItem sell={sell} key={sell.id} />
+                <DashboardItem sell={sell} key={sell?.id} />
               ))}
             </div>
           )}
