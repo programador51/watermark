@@ -18,6 +18,7 @@ const nextAuthOptions = (req, res) => ({
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       try {
