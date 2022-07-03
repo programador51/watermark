@@ -11,7 +11,7 @@ import Label from "./Label";
  * Context canvas
  * @type {import("react").Context<import("./types").CanvasContext>}
  */
-export const CanvasContext = createContext("");
+export const CanvasContext = createContext(null);
 const { Provider } = CanvasContext;
 
 /**
