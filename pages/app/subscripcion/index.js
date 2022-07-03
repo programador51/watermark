@@ -11,7 +11,7 @@ import LoadingStatus from "./LoadingStatus";
 /**
  * @type {import("react-markdown/lib/ast-to-react").Context<{subscription:import("./types").StateSubscription}>}
  */
-export const ContextSubscription = createContext();
+export const ContextSubscription = createContext("");
 const { Provider } = ContextSubscription;
 
 export default function Subscription() {
