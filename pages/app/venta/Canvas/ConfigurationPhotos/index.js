@@ -12,8 +12,8 @@ export default function ConfigurationPhotos() {
       <div className={styles.color}>
         <p className={styles.label}>Color marca de agua</p>
         <Chrome
-          color={waterMarks.configuration.colorWatermark.uuid}
-          onChange={({ hexa }) => waterMarks.updateColorWatermark(hexa)}
+          color={waterMarks?.configuration.colorWatermark.uuid}
+          onChange={({ hexa }) => waterMarks?.updateColorWatermark(hexa)}
         />
       </div>
 
@@ -22,9 +22,9 @@ export default function ConfigurationPhotos() {
         <input
           id="noneWatermark"
           type="radio"
-          checked={waterMarks.isChecked("none")}
+          checked={waterMarks?.isChecked("none")}
           name="watermarkLevel"
-          onChange={() => waterMarks.updateWatermarkLevel("none")}
+          onChange={() => waterMarks?.updateWatermarkLevel("none")}
           value="none"
         />
         <label htmlFor="noneWatermark">Ninguna</label>
@@ -34,8 +34,8 @@ export default function ConfigurationPhotos() {
           type="radio"
           name="watermarkLevel"
           value="low"
-          checked={waterMarks.isChecked("low")}
-          onChange={() => waterMarks.updateWatermarkLevel("low")}
+          checked={waterMarks?.isChecked("low")}
+          onChange={() => waterMarks?.updateWatermarkLevel("low")}
         />
         <label htmlFor="lowWatermark">Baja</label>
 
@@ -44,8 +44,8 @@ export default function ConfigurationPhotos() {
           type="radio"
           name="watermarkLevel"
           value="normal"
-          checked={waterMarks.isChecked("normal")}
-          onChange={() => waterMarks.updateWatermarkLevel("normal")}
+          checked={waterMarks?.isChecked("normal")}
+          onChange={() => waterMarks?.updateWatermarkLevel("normal")}
         />
         <label htmlFor="regularWatermark">Normal</label>
       </div>

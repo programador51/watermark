@@ -4,7 +4,6 @@ import withReactContent from "sweetalert2-react-content";
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import mime from "mime";
-import { publishFilesToGoFile } from "helpers/gofile";
 import { createAlbum } from "helpers/apis/sell";
 import useNavigation from "../useNavigation";
 
