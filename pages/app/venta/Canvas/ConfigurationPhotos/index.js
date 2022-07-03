@@ -7,7 +7,7 @@ import styles from "../index.module.scss";
 export default function ConfigurationPhotos() {
   const waterMarks = useContext(CanvasContext);
 
-  return (
+  return waterMarks === undeinfed ? null : (
     <>
       <div className={styles.color}>
         <p className={styles.label}>Color marca de agua</p>

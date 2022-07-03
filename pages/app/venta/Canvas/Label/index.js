@@ -10,7 +10,7 @@ export default function Label() {
     ? true
     : false;
 
-  return (
+  return waterMarks === undefined ? null : (
     <>
       <p className={styles.label}>Mostrar leyenda</p>
       <div className={styles.containerAgressiveWatermark}>

@@ -5,7 +5,7 @@ import { ContextSubscription } from "..";
 export default function PremiumMessage() {
   const { subscription } = useContext(ContextSubscription);
 
-  return (
+  return subscription === undefined ? null : (
     <>
       <p>¡Tu cuenta es premium! 👑</p>
       <p>
