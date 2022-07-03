@@ -26,7 +26,7 @@ export default function DashboardItem({ sell }) {
     (async function () {
       if (!state.isOpen) return;
 
-      const apiInfo = await getSellInformation(sell.id);
+      const apiInfo = await getSellInformation(sell?.id);
       setState({
         ...state,
         uuids: apiInfo.uuids,
@@ -39,7 +39,7 @@ export default function DashboardItem({ sell }) {
         iconColor: "#a268ae",
         html: (
           <div className={styles.infoSell}>
-            <h1>Album [{sell.id}]</h1>
+            <h1>Album [{sell?.id}]</h1>
             <hr />
 
             <details>
@@ -82,12 +82,12 @@ export default function DashboardItem({ sell }) {
   };
 
   return (
-    <article className={styles.sell} key={sell.id}>
+    <article className={styles.sell} key={sell?.id}>
       <p onClick={showContentAlbum}>
-        {sell.id} {state.isLoading ? "- Un momento..." : ""}
+        {sell?.id} {state.isLoading ? "- Un momento..." : ""}
       </p>
-      <time>{sell.creationDate}</time>
-      {sell.Customer === null ? null : <span>{sell.Customer.name}</span>}
+      <time>{sell?.creationDate}</time>
+      {sell?.Customer === null ? null : <span>{sell?.Customer.name}</span>}
     </article>
   );
 }

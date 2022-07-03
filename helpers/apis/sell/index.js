@@ -29,6 +29,13 @@ export async function createAlbum(id, idsPhotos, notes = null) {
  */
 export async function getSellInformation(id) {
   try {
+    if (id === null || id === undefined) {
+      return {
+        note: "",
+        uuids: [],
+      };
+    }
+
     const { data } = await axios.get(`/api/app/sell/${id}`, {
       withCredentials: true,
     });
