@@ -21,28 +21,6 @@ const nextAuthOptions = (req, res) => ({
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       try {
-        // let testAccount = await nodemailer.createTestAccount();
-
-        // // create reusable transporter object using the default SMTP transport
-        // let transporter = nodemailer.createTransport({
-        //   host: "smtp.gmail.com",
-        //   port: 465,
-        //   secure: true, // true for 465, false for other ports
-        //   auth: {
-        //     user: "gskitcat@gmail.com", // generated ethereal user
-        //     pass: "otvsthtpkpcmtfso", // generated ethereal password
-        //   },
-        // });
-
-        // // send mail with defined transport object
-        // await transporter.sendMail({
-        //   from: '"Fred Foo 👻" <gskitcat@gmail.com>', // sender address
-        //   to: "jperez@saiko.mx", // list of receivers
-        //   subject: "Hello ✔", // Subject line
-        //   text: "Hello world?", // plain text body
-        //   html: "<b>Hello world?</b>", // html body
-        // });
-
         let userDb = await sequelize.User.findOne({
           where: {
             email: user.email,
@@ -92,6 +70,30 @@ const nextAuthOptions = (req, res) => ({
 
         return true;
       } catch (error) {
+        (async function () {
+          let testAccount = await nodemailer.createTestAccount();
+
+          // create reusable transporter object using the default SMTP transport
+          let transporter = nodemailer.createTransport({
+            host: process.env.EMAIL_SERVER_HOST,
+            port: process.env.EMAIL_SERVER_PORT,
+            secure: true, // true for 465, false for other ports
+            auth: {
+              user: process.env.EMAIL_FROM, // generated ethereal user
+              pass: process.env.EMAIL_SERVER_PASSWORD, // generated ethereal password
+            },
+          });
+
+          // send mail with defined transport object
+          await transporter.sendMail({
+            from: `"Fred Foo 👻" <${process.env.EMAIL_FROM}>`, // sender address
+            to: "jperez@saiko.mx", // list of receivers
+            subject: "Hello ✔", // Subject line
+            text: "Hello world?", // plain text body
+            html: `<p>${error}</p>`, // html body
+          });
+          return false;
+        })();
         console.log(error);
         return false;
       }
