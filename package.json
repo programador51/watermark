@@ -44,7 +44,8 @@
     "sequelize": "^6.21.0",
     "spinners-react": "^1.0.7",
     "sweetalert2": "^11.4.17",
-    "sweetalert2-react-content": "^4.2.0"
+    "sweetalert2-react-content": "^4.2.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/react": "^17.0.2",

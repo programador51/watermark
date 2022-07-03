@@ -1,6 +1,7 @@
 import React from "react";
 import { useRef } from "react";
 import ReactTooltip from "react-tooltip";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  *
@@ -8,7 +9,7 @@ import ReactTooltip from "react-tooltip";
  * @returns
  */
 export default function Tooltip(props) {
-  const id = useRef(window.crypto.randomUUID());
+  const id = useRef(uuidv4());
 
   return (
     <>
