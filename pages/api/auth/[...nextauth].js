@@ -3,8 +3,6 @@ import FacebookProvider from "next-auth/providers/facebook";
 import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
 import { setCookies } from "cookies-next";
-// const requestIp = require('request-ip');
-import requestIp from "request-ip";
 import { sequelize } from "../../../sequelize/querys";
 
 /**
@@ -95,7 +93,7 @@ const nextAuthOptions = (req, res) => ({
         return true;
       } catch (error) {
         console.log(error);
-        return true;
+        return user;
       }
     },
   },
