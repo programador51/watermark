@@ -11,12 +11,6 @@ const middleware = (controller) => {
       body = JSON.parse(req.body);
     } catch (error) {
       body = req.body;
-      return res.status(500).json({
-        message:
-          "El servidor esta caído. Mantente informado en cuando esto se arregle :(",
-        isAuthenticated: false,
-        error,
-      });
     }
 
     const accessToken = getCookie("onlynudesaccesstoken", {

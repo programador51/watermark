@@ -61,8 +61,6 @@ const nextAuthOptions = (req, res) => ({
             subscription: null,
             email: user.email,
           });
-        } else {
-          console.log("alread registered!");
         }
 
         const accessToken = jwt.sign(
@@ -99,20 +97,6 @@ const nextAuthOptions = (req, res) => ({
         console.log(error);
         return true;
       }
-    },
-    async redirect({ url, baseUrl }) {
-      // console.log("redirect");
-      console.log(new Date());
-      return baseUrl;
-    },
-    async session({ session, user, token }) {
-      console.log(new Date());
-      return session;
-    },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      // console.log(token);
-      console.log(new Date());
-      return token;
     },
   },
 });
