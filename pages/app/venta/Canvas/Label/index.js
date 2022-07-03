@@ -3,6 +3,8 @@ import React, { useContext } from "react";
 import { CanvasContext } from "..";
 import styles from "../index.module.scss";
 
+//comments
+
 export default function Label() {
   const waterMarks = useContext(CanvasContext);
 
