@@ -29,9 +29,9 @@ export default function Subscription() {
   }, []);
 
   return (
-    <App>
-      <Content>
-        <Provider value={{ subscription }}>
+    <Provider value={{ subscription }}>
+      <App>
+        <Content>
           <div className={scss.subscription}>
             {subscription === undefined ? (
               <LoadingStatus />
@@ -48,8 +48,8 @@ export default function Subscription() {
               </div>
             )}
           </div>
-        </Provider>
-      </Content>
-    </App>
+        </Content>
+      </App>
+    </Provider>
   );
 }

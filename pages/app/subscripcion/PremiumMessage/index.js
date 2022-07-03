@@ -5,16 +5,18 @@ import { ContextSubscription } from "..";
 export default function PremiumMessage() {
   const { subscription } = useContext(ContextSubscription);
 
+  console.log(subscription);
+
   return subscription === undefined ? null : (
     <>
       <p>¡Tu cuenta es premium! 👑</p>
       <p>
         Disfruta de los beneficios hasta el{" "}
-        <date time={subscription.date}>
+        <time dateTime={subscription.date}>
           {new Intl.DateTimeFormat("es-MX", {
             dateStyle: "long",
           }).format(new Date(subscription.date))}
-        </date>
+        </time>
       </p>
       <p>😁</p>
     </>
