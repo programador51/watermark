@@ -11,7 +11,7 @@ import Label from "./Label";
  * Context canvas
  * @type {import("react").Context<import("./types").CanvasContext>}
  */
-export const CanvasContext = createContext(null);
+export const CanvasContext = createContext({});
 const { Provider } = CanvasContext;
 
 /**
@@ -36,10 +36,12 @@ export default function Canvas({
     <Provider value={{ ...waterMarks }}>
       {waterMarks.canvas.map((canvas, i) => (
         <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             style={{
               display: "none",
             }}
+            alt={`canva-${i}`}
             onLoad={(e) =>
               waterMarks.updateDimensionsImage(
                 e.target.width,
