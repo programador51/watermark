@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import FacebookProvider from "next-auth/providers/facebook";
-import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
 import { setCookies } from "cookies-next";
 import { sequelize } from "../../../sequelize/querys";
