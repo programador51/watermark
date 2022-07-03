@@ -94,7 +94,7 @@ const nextAuthOptions = (req, res) => ({
         return true;
       } catch (error) {
         console.log(error);
-        return user;
+        return false;
       }
     },
   },
