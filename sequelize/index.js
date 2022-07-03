@@ -20,6 +20,7 @@ const db = new Sequelize(`${process.env.DB_URI}`, {
   database: process.env.DB_NAME,
   logging: false,
   dialect: "mssql",
+  dialectModule: require("mysql2"),
 });
 
 export default db;
