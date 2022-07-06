@@ -1,10 +1,10 @@
 import { Sequelize } from "sequelize";
 
-// const db = new Sequelize("onlynudes", "root", null, {
-//   host: "localhost",
-//   dialect: "mysql",
-//   logging: false,
-// });
+const db = new Sequelize("onlynudes", "root", null, {
+  host: "localhost",
+  dialect: "mysql",
+  logging: false,
+});
 
 // const db = new Sequelize(
 //   process.env.DB_NAME,
@@ -16,11 +16,11 @@ import { Sequelize } from "sequelize";
 //   }
 // );
 
-const db = new Sequelize(`${process.env.DB_URI}`, {
-  database: process.env.DB_NAME,
-  logging: false,
-  dialect: "mssql",
-  dialectModule: require("mysql2"),
-});
+// const db = new Sequelize(`${process.env.DB_URI}`, {
+//   database: process.env.DB_NAME,
+//   logging: false,
+//   dialect: "mssql",
+//   dialectModule: require("mysql2"),
+// });
 
 export default db;

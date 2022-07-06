@@ -87,7 +87,7 @@ export default function DashboardItem({ sell }) {
         {sell?.id} {state.isLoading ? "- Un momento..." : ""}
       </p>
       <time>{sell?.creationDate}</time>
-      {sell?.Customer === null ? null : <span>{sell?.Customer.name}</span>}
+      {sell?.customer === null ? null : <span>{sell?.customer?.name}</span>}
     </article>
   );
 }
